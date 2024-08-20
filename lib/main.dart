@@ -6,12 +6,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-
-void main() async{
-  runApp(const BooklyApp());
+void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(BookEntityAdapter());
-  await Hive.openBox(kFeaturedBox);
+  await Hive.openBox<BookEntity>(kFeaturedBox);
+  await Hive.openBox<BookEntity>(kNewestBox);
+  runApp(const BooklyApp());
+
 }
 
 class BooklyApp extends StatelessWidget {
@@ -20,13 +21,12 @@ class BooklyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-        routerConfig: AppRouter.router,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: kPrimaryColor,
-          textTheme:
-              GoogleFonts.montserratTextTheme(ThemeData.dark().textTheme),
-        ),
+      routerConfig: AppRouter.router,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: kPrimaryColor,
+        textTheme: GoogleFonts.montserratTextTheme(ThemeData.dark().textTheme),
+      ),
     );
   }
 }
