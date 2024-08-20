@@ -5,6 +5,7 @@ class BookEntity {
   final String? authorName;
   final num? price;
   final num? rating;
+  final num? count;
 
   BookEntity({
     this.image,
@@ -13,5 +14,6 @@ class BookEntity {
     this.price,
     this.rating,
     this.bookId,
+    this.count,
   });
 }
