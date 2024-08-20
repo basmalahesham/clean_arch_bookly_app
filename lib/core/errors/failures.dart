@@ -16,7 +16,7 @@ class ServerFailure extends Failure {
       case DioExceptionType.receiveTimeout:
         return ServerFailure('Receive timeout with ApiServer');
       case DioExceptionType.badCertificate:
-      // TODO: Handle this case.
+        return ServerFailure('badCertificate with ApiServer');
       case DioExceptionType.badResponse:
         return ServerFailure.fromResponse(
             dioException.response!.statusCode!, dioException.response!.data);
@@ -41,4 +41,12 @@ class ServerFailure extends Failure {
       return ServerFailure('Oops! There was an Error, please try later!');
     }
   }
+}
+
+class NetworkFailure extends Failure {
+  NetworkFailure(super.errMessage);
+}
+
+class CacheFailure extends Failure {
+  CacheFailure(super.errMessage);
 }
