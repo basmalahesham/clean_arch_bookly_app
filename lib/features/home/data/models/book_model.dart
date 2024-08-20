@@ -1,4 +1,6 @@
-class BookModel {
+import 'package:clean_arch_bookly_app/features/home/domain/entities/book_entity.dart';
+
+class BookModel extends BookEntity {
   String? kind;
   String? id;
   String? etag;
@@ -16,7 +18,15 @@ class BookModel {
       required this.volumeInfo,
       this.saleInfo,
       this.accessInfo,
-      this.searchInfo});
+      this.searchInfo})
+      : super(
+          image: volumeInfo.imageLinks?.thumbnail ?? '',
+          title: volumeInfo.title!,
+          authorName: volumeInfo.authors!.first,
+          price: 0,
+          rating: volumeInfo.averageRating,
+          bookId: id!,
+        );
 
   BookModel.fromJson(Map<String, dynamic> json) {
     kind = json['kind'];
