@@ -43,7 +43,7 @@ class BooklyApp extends StatelessWidget {
             FetchNewestBooksUseCase(
               getIt.get<HomeRepoImpl>(),
             ),
-          );
+          )..fetchNewestBooks();
         }),
       ],
       child: MaterialApp.router(
