@@ -16,8 +16,10 @@ class BookEntity {
   final num? rating;
   @HiveField(6)
   final num? count;
+  @HiveField(7)
+  final String? category;
 
-  BookEntity({
+  BookEntity( {
     this.image,
     this.title,
     this.authorName,
@@ -25,5 +27,6 @@ class BookEntity {
     this.rating,
     required this.bookId,
     this.count,
+    this.category,
   });
 }

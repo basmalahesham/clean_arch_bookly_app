@@ -27,6 +27,7 @@ class BookModel extends BookEntity {
           rating: volumeInfo?.averageRating ?? 0,
           count: volumeInfo?.ratingsCount ?? 0,
           bookId: id!,
+          category: volumeInfo?.categories?.first,
         );
 
   factory BookModel.fromJson(Map<String, dynamic> json) => BookModel(
