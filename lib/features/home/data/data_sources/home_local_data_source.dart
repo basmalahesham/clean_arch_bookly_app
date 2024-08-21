@@ -5,6 +5,8 @@ import 'package:hive/hive.dart';
 abstract class HomeLocalDataSource {
   List<BookEntity> fetchFeatureBooks();
   List<BookEntity> fetchNewestBooks();
+  List<BookEntity> fetchSimilarBooks();
+
 }
 class HomeLocalDataSourceImpl extends HomeLocalDataSource{
   @override
@@ -16,6 +18,12 @@ class HomeLocalDataSourceImpl extends HomeLocalDataSource{
   @override
   List<BookEntity> fetchNewestBooks() {
     var box = Hive.box<BookEntity>(kNewestBox);
+    return box.values.toList();
+  }
+
+  @override
+  List<BookEntity> fetchSimilarBooks() {
+    var box = Hive.box<BookEntity>(kSimilarBox);
     return box.values.toList();
   }
 
