@@ -1,5 +1,5 @@
 import 'package:clean_arch_bookly_app/core/utils/app_router.dart';
-import 'package:clean_arch_bookly_app/features/home/domain/entities/book_entity.dart';
+import 'package:clean_arch_bookly_app/features/home/presentation/views/book_details_view.dart';
 import 'package:clean_arch_bookly_app/features/home/presentation/views/widgets/book_rating.dart';
 import 'package:clean_arch_bookly_app/features/home/presentation/views/widgets/custom_book_image.dart';
 import 'package:flutter/material.dart';
@@ -11,18 +11,17 @@ import '../../../../../core/utils/styles.dart';
 class BookListViewItem extends StatelessWidget {
   const BookListViewItem({
     super.key,
-    required this.books,
-    required this.index,
+    required this.model,
   });
 
-  final List<BookEntity> books;
-  final int index;
+  final Model model;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         GoRouter.of(context).push(
           AppRouter.kBookDetailsView,
+          extra: model,
         );
       },
       child: SizedBox(
@@ -30,7 +29,7 @@ class BookListViewItem extends StatelessWidget {
         child: Row(
           children: [
             CustomBookImage(
-              imageUrl: books[index].image ?? '',
+              imageUrl: model.books[model.index].image ?? '',
             ),
             const SizedBox(
               width: 30,
@@ -42,7 +41,7 @@ class BookListViewItem extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.5,
                     child: Text(
-                      books[index].title??'',
+                      model.books[model.index].title ?? '',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Styles.textStyle20.copyWith(
@@ -54,7 +53,7 @@ class BookListViewItem extends StatelessWidget {
                     height: 3,
                   ),
                   Text(
-                    books[index].authorName ?? '',
+                    model.books[model.index].authorName ?? '',
                     style: Styles.textStyle14,
                   ),
                   const SizedBox(
@@ -70,8 +69,8 @@ class BookListViewItem extends StatelessWidget {
                       ),
                       const Spacer(),
                       BookRating(
-                        rating: books[index].rating?.round() ?? 0,
-                        count: books[index].count?.round() ?? 0,
+                        rating: model.books[model.index].rating?.round() ?? 0,
+                        count: model.books[model.index].count?.round() ?? 0,
                       ),
                     ],
                   ),

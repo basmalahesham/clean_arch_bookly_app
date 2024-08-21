@@ -1,5 +1,6 @@
 import 'package:clean_arch_bookly_app/core/utils/app_router.dart';
 import 'package:clean_arch_bookly_app/features/home/domain/entities/book_entity.dart';
+import 'package:clean_arch_bookly_app/features/home/presentation/views/book_details_view.dart';
 import 'package:clean_arch_bookly_app/features/home/presentation/views/widgets/custom_book_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -22,10 +23,11 @@ class FeatureBooksListView extends StatelessWidget {
             onTap: () {
               GoRouter.of(context).push(
                 AppRouter.kBookDetailsView,
+                extra: Model(books, index),
               );
             },
             child: CustomBookImage(
-              imageUrl: books[index].image??'',
+              imageUrl: books[index].image ?? '',
             ),
           ),
         ),
