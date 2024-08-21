@@ -22,14 +22,3 @@ class CustomBookImage extends StatelessWidget {
     );
   }
 }
-/*Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          image: DecorationImage(
-            image: NetworkImage(
-              imageUrl,
-            ),
-            fit: BoxFit.fill,
-          ),
-        ),
-      )*/

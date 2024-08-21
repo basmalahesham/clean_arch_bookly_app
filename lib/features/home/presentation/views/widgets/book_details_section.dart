@@ -5,7 +5,9 @@ import 'package:clean_arch_bookly_app/features/home/presentation/views/widgets/c
 import 'package:flutter/material.dart';
 
 class BookDetailsSection extends StatelessWidget {
-  const BookDetailsSection({super.key,});
+  const BookDetailsSection({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class BookDetailsSection extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: width * .2),
           child: const CustomBookImage(
-            imageUrl: 'assets/images/test_image.png',
+            imageUrl: '',
           ),
         ),
         const SizedBox(
@@ -44,7 +46,9 @@ class BookDetailsSection extends StatelessWidget {
           height: 18,
         ),
         const BookRating(
-          mainAxisAlignment: MainAxisAlignment.center, rating: 6, count: 9,
+          mainAxisAlignment: MainAxisAlignment.center,
+          rating: 6,
+          count: 9,
         ),
         const SizedBox(
           height: 37,
