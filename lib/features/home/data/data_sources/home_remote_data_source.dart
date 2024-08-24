@@ -5,9 +5,9 @@ import 'package:clean_arch_bookly_app/features/home/data/models/book_model.dart'
 import 'package:clean_arch_bookly_app/features/home/domain/entities/book_entity.dart';
 
 abstract class HomeRemoteDataSource {
-  Future<List<BookEntity>> fetchFeatureBooks();
+  Future<List<BookEntity>> fetchFeatureBooks({int pageNumber = 0});
   Future<List<BookEntity>> fetchNewestBooks();
-  Future<List<BookEntity>> fetchSimilarBooks();
+  Future<List<BookEntity>> fetchSimilarBooks({required String category});
 }
 
 class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
@@ -15,9 +15,9 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
 
   HomeRemoteDataSourceImpl(this.apiService);
   @override
-  Future<List<BookEntity>> fetchFeatureBooks() async {
+  Future<List<BookEntity>> fetchFeatureBooks({int pageNumber = 0}) async {
     var data = await apiService.get(
-        endPoint: 'volumes?q=subject:programming&Filtering=free-ebooks');
+        endPoint: 'volumes?q=subject:programming&Filtering=free-ebooks&startIndex=${pageNumber * 10}');
     List<BookEntity> books = getBooksList(data);
     saveBooksData(books, kFeaturedBox);
     return books;
@@ -35,7 +35,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   }
 
   @override
-  Future<List<BookEntity>> fetchSimilarBooks() async {
+  Future<List<BookEntity>> fetchSimilarBooks({required String category}) async {
     var data = await apiService.get(
         endPoint:
             'volumes?q=subject:programming&Filtering=free-ebooks&Sorting=relevance');
