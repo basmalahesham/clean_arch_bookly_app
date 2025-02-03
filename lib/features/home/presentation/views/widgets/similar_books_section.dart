@@ -1,10 +1,11 @@
 import 'package:clean_arch_bookly_app/core/utils/styles.dart';
-import 'package:clean_arch_bookly_app/features/home/presentation/views/widgets/similar_books_list_view_bloc_builder.dart';
+import 'package:clean_arch_bookly_app/features/home/presentation/views/book_details_view.dart';
+import 'package:clean_arch_bookly_app/features/home/presentation/views/widgets/similar_books_list_view_bloc_consumer.dart';
 import 'package:flutter/material.dart';
 
 class SimilarBooksSection extends StatelessWidget {
-  const SimilarBooksSection({super.key});
-
+  const SimilarBooksSection({super.key, required this.model});
+  final Model model;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,9 +20,10 @@ class SimilarBooksSection extends StatelessWidget {
         const SizedBox(
           height: 16,
         ),
-        const SimilarBooksListViewBlocBuilder(),
+        SimilarBooksListViewBlocConsumer(
+          model: model,
+        ),
       ],
     );
   }
 }
-

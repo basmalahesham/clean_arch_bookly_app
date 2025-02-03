@@ -65,14 +65,16 @@ class HomeRepoImpl extends HomeRepo {
   }
 
   @override
-  Future<Either<Failure, List<BookEntity>>> fetchSimilarBooks({required String category}) async{
+  Future<Either<Failure, List<BookEntity>>> fetchSimilarBooks({required String category,int pageNumber = 0}) async{
+    List<BookEntity> books;
     try {
-      List<BookEntity> books;
-      books = homeLocalDataSource.fetchSimilarBooks();
+      books = homeLocalDataSource.fetchSimilarBooks(
+        pageNumber: pageNumber,
+      );
       if (books.isNotEmpty) {
         return right(books);
       }
-      books = await homeRemoteDataSource.fetchSimilarBooks(category: category);
+      books = await homeRemoteDataSource.fetchSimilarBooks(category: category,pageNumber: pageNumber);
       return right(books);
     } catch (e) {
       if (e is DioException) {

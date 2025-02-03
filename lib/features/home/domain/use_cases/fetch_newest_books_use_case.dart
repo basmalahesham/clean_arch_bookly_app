@@ -4,7 +4,7 @@ import 'package:clean_arch_bookly_app/features/home/domain/entities/book_entity.
 import 'package:clean_arch_bookly_app/features/home/domain/repos/home_repo.dart';
 import 'package:dartz/dartz.dart';
 
-class FetchNewestBooksUseCase extends UseCase<List<BookEntity>, NoParam> {
+class FetchNewestBooksUseCase extends UseCase<List<BookEntity>, NoParam,NoParam> {
   final HomeRepo homeRepo;
   FetchNewestBooksUseCase(this.homeRepo);
 

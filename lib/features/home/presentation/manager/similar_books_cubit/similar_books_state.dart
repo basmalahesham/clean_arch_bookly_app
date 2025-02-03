@@ -6,6 +6,11 @@ sealed class SimilarBooksState {}
 final class SimilarBooksInitial extends SimilarBooksState {}
 
 final class SimilarBooksLoading extends SimilarBooksState {}
+final class SimilarBooksPaginationLoading extends SimilarBooksState {}
+final class SimilarBooksPaginationFailure extends SimilarBooksState {
+  final String errMessage;
+  SimilarBooksPaginationFailure(this.errMessage);
+}
 
 final class SimilarBooksSuccess extends SimilarBooksState {
   final List<BookEntity> books;
