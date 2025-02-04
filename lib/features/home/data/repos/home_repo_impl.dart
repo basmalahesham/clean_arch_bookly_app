@@ -14,9 +14,9 @@ class HomeRepoImpl extends HomeRepo {
       {required this.homeRemoteDataSource, required this.homeLocalDataSource});
 
   @override
-  Future<Either<Failure, List<BookEntity>>> fetchFeatureBooks({int pageNumber = 0}) async {
+  Future<Either<Failure, List<BookEntity>>> fetchFeatureBooks(
+      {int pageNumber = 0}) async {
     List<BookEntity> books;
-
     try {
       books = homeLocalDataSource.fetchFeatureBooks(
         pageNumber: pageNumber,
@@ -24,7 +24,8 @@ class HomeRepoImpl extends HomeRepo {
       if (books.isNotEmpty) {
         return right(books);
       }
-      books = await homeRemoteDataSource.fetchFeatureBooks(pageNumber: pageNumber);
+      books =
+          await homeRemoteDataSource.fetchFeatureBooks(pageNumber: pageNumber);
       return right(books);
     } catch (e) {
       if (e is DioException) {
@@ -41,14 +42,18 @@ class HomeRepoImpl extends HomeRepo {
   }
 
   @override
-  Future<Either<Failure, List<BookEntity>>> fetchNewestBooks() async {
+  Future<Either<Failure, List<BookEntity>>> fetchNewestBooks(
+      {int pageNumber = 0}) async {
+    List<BookEntity> books;
     try {
-      List<BookEntity> books;
-      books = homeLocalDataSource.fetchNewestBooks();
+      books = homeLocalDataSource.fetchNewestBooks(
+        pageNumber: pageNumber,
+      );
       if (books.isNotEmpty) {
         return right(books);
       }
-      books = await homeRemoteDataSource.fetchNewestBooks();
+      books =
+          await homeRemoteDataSource.fetchNewestBooks(pageNumber: pageNumber);
       return right(books);
     } catch (e) {
       if (e is DioException) {
@@ -65,7 +70,8 @@ class HomeRepoImpl extends HomeRepo {
   }
 
   @override
-  Future<Either<Failure, List<BookEntity>>> fetchSimilarBooks({required String category,int pageNumber = 0}) async{
+  Future<Either<Failure, List<BookEntity>>> fetchSimilarBooks(
+      {required String category, int pageNumber = 0}) async {
     List<BookEntity> books;
     try {
       books = homeLocalDataSource.fetchSimilarBooks(
@@ -74,7 +80,8 @@ class HomeRepoImpl extends HomeRepo {
       if (books.isNotEmpty) {
         return right(books);
       }
-      books = await homeRemoteDataSource.fetchSimilarBooks(category: category,pageNumber: pageNumber);
+      books = await homeRemoteDataSource.fetchSimilarBooks(
+          category: category, pageNumber: pageNumber);
       return right(books);
     } catch (e) {
       if (e is DioException) {

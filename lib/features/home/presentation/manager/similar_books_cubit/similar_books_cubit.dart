@@ -17,7 +17,6 @@ class SimilarBooksCubit extends Cubit<SimilarBooksState> {
     }
     var result = await similarBooksUseCase.call(category, pageNumber);
     result.fold((failure) {
-      emit(SimilarBooksFailure(failure.errMessage));
       if (pageNumber == 0) {
         emit(SimilarBooksFailure(failure.errMessage));
       } else {

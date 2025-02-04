@@ -6,8 +6,9 @@ import 'package:clean_arch_bookly_app/features/home/domain/entities/book_entity.
 
 abstract class HomeRemoteDataSource {
   Future<List<BookEntity>> fetchFeatureBooks({int pageNumber = 0});
-  Future<List<BookEntity>> fetchNewestBooks();
-  Future<List<BookEntity>> fetchSimilarBooks({required String category,int pageNumber = 0});
+  Future<List<BookEntity>> fetchNewestBooks({int pageNumber = 0});
+  Future<List<BookEntity>> fetchSimilarBooks(
+      {required String category, int pageNumber = 0});
 }
 
 class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
@@ -17,17 +18,18 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   @override
   Future<List<BookEntity>> fetchFeatureBooks({int pageNumber = 0}) async {
     var data = await apiService.get(
-        endPoint: 'volumes?q=subject:programming&Filtering=free-ebooks&startIndex=${pageNumber * 10}');
+        endPoint:
+            'volumes?q=subject:programming&Filtering=free-ebooks&startIndex=${pageNumber * 10}');
     List<BookEntity> books = getBooksList(data);
     saveBooksData(books, kFeaturedBox);
     return books;
   }
 
   @override
-  Future<List<BookEntity>> fetchNewestBooks() async {
+  Future<List<BookEntity>> fetchNewestBooks({int pageNumber = 0}) async {
     var data = await apiService.get(
         endPoint:
-            'volumes?q=computer science&Filtering=free-ebooks&Sorting=newest');
+            'volumes?q=computer science&Filtering=free-ebooks&Sorting=newest&startIndex=${pageNumber * 10}');
     List<BookEntity> books = getBooksList(data);
     saveBooksData(books, kNewestBox);
 
@@ -35,7 +37,8 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   }
 
   @override
-  Future<List<BookEntity>> fetchSimilarBooks({required String category,int pageNumber = 0}) async {
+  Future<List<BookEntity>> fetchSimilarBooks(
+      {required String category, int pageNumber = 0}) async {
     var data = await apiService.get(
         endPoint:
             'volumes?q=subject:programming&Filtering=free-ebooks&Sorting=relevance&startIndex=${pageNumber * 10}');

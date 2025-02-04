@@ -35,49 +35,46 @@ class BookListViewItem extends StatelessWidget {
               width: 30,
             ),
             Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      child: Text(
-                        model.books[model.index].title ?? '',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: Styles.textStyle20.copyWith(
-                          fontFamily: kGtSectraFire,
-                        ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: Text(
+                      model.books[model.index].title ?? '',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Styles.textStyle20.copyWith(
+                        fontFamily: kGtSectraFire,
                       ),
                     ),
-                    const SizedBox(
-                      height: 3,
-                    ),
-                    Text(
-                      model.books[model.index].authorName ?? '',
-                      style: Styles.textStyle14,
-                    ),
-                    const SizedBox(
-                      height: 3,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'Free',
-                          style: Styles.textStyle20.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                    model.books[model.index].authorName ?? '',
+                    style: Styles.textStyle14,
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Free',
+                        style: Styles.textStyle20.copyWith(
+                          fontWeight: FontWeight.bold,
                         ),
-                        const Spacer(),
-                        BookRating(
-                          rating: model.books[model.index].rating?.round() ?? 0,
-                          count: model.books[model.index].count?.round() ?? 0,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                      const Spacer(),
+                      BookRating(
+                        rating: model.books[model.index].rating?.round() ?? 0,
+                        count: model.books[model.index].count?.round() ?? 0,
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],
